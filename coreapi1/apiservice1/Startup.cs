@@ -50,6 +50,9 @@ namespace apiservice1
 
             app.UseAuthorization();
 
+            // authentication
+            app.UseAuthentication();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

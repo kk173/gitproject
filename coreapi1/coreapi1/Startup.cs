@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer4.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,7 +29,13 @@ namespace coreapi1
             IdentyServerConfig.Configuration = Configuration;
 
             services.AddIdentityServer()
-                    .AddDeveloperSigningCredential().AddTestUsers(IdentyServerConfig.GetUsers().ToList()).AddInMemoryClients(IdentyServerConfig.GetClients().ToList()).AddInMemoryApiResources(IdentyServerConfig.GetApiResources().ToList());
+                    .AddDeveloperSigningCredential()
+                    //.AddTestUsers(IdentyServerConfig.GetUsers().ToList())
+                    .AddInMemoryClients(IdentyServerConfig.GetClients().ToList())
+                    .AddInMemoryApiResources(IdentyServerConfig.GetApiResources().ToList())
+                    //.AddDbStore()
+                    .AddResourceOwnerValidator<CustomResourceOwnerPasswordValidator>()
+                    ;
 
         }
 

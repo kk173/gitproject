@@ -10,7 +10,7 @@ namespace apiservice1.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize]
+    [Authorize(Roles = "haha,superadmin")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -28,6 +28,9 @@ namespace apiservice1.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+            var claims = User.Claims;
+            claims.ToString();
+
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

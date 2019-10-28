@@ -1,9 +1,11 @@
-﻿using IdentityServer4.Models;
+﻿using IdentityModel;
+using IdentityServer4.Models;
 using IdentityServer4.Test;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace coreapi1
@@ -19,7 +21,7 @@ namespace coreapi1
         {
             return new[]
             {
-                new ApiResource("clientservice", "CAS Client Service"),
+                new ApiResource("clientservice", "CAS Client Service",new List<string>{ IdentityModel.JwtClaimTypes.Role }),
                 new ApiResource("productservice", "CAS Product Service"),
                 new ApiResource("agentservice", "CAS Agent Service")
             };
@@ -63,13 +65,35 @@ namespace coreapi1
         /// <returns></returns>
         public static IEnumerable<TestUser> GetUsers()
         {
+            return new List<TestUser>();
             return new[]
             {
                 new TestUser
                 {
                     SubjectId = "10001",
                     Username = "edison@hotmail.com",
-                    Password = "edisonpassword"
+                    Password = "edisonpassword",
+                    Claims =new List<Claim>
+                    {
+                        new Claim(JwtClaimTypes.Role, "superadmin"),
+                        new Claim(JwtClaimTypes.Role, "superadmin1"),
+                        new Claim(JwtClaimTypes.Role, "superadmin2"),
+                        new Claim(JwtClaimTypes.Role, "superadmin3"),
+                        new Claim(JwtClaimTypes.Role, "superadmin4"),
+                        new Claim(JwtClaimTypes.Role, "superadmin5"),
+                        new Claim(JwtClaimTypes.Role, "superadmin6"),
+                        new Claim(JwtClaimTypes.Role, "superadmin7"),
+                        new Claim(JwtClaimTypes.Role, "superadmin8"),
+                        new Claim(JwtClaimTypes.Role, "superadmin9"),
+                        new Claim(JwtClaimTypes.Role, "superadmin10"),
+                        new Claim(JwtClaimTypes.Role, "superadmin11"),
+                        new Claim(JwtClaimTypes.Role, "superadmin12"),
+                        new Claim(JwtClaimTypes.Role, "superadmin13"),
+                        new Claim(JwtClaimTypes.Role, "superadmin14"),
+                        new Claim(JwtClaimTypes.Role, "superadmin15"),
+                        new Claim(JwtClaimTypes.Role, "superadmin16"),
+                        new Claim(JwtClaimTypes.Role, "superadmin17"),
+                    }
                 },
                 new TestUser
                 {
